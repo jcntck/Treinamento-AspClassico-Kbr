@@ -3,7 +3,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="//<%=url_admin%>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-users-cog"></i>
         </div>
@@ -14,8 +14,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="#">
+    <li class="nav-item <% activePage("admin") %>">
+        <a class="nav-link" href="//<%=url_admin%>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -29,8 +29,8 @@
     </div>
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item <% activePage("lojistas") %>">
+        <a class="nav-link" href="//<%=url_admin%>modules/lojistas/">
             <i class="fas fa-store-alt"></i>
             <span>Lojistas</span></a>
     </li>

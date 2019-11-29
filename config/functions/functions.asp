@@ -28,4 +28,13 @@
 		Response.Write("<div class='alert alert-danger'><strong>"&msg&"</strong></div>")
 	end function
 
+	Function activePage( ByVal link )
+		PaginaAtual		= Request.ServerVariables( "SCRIPT_NAME" )
+		aPaginaAtual 	= Split(PaginaAtual, "/")
+		PaginaAtual		= LCase( aPaginaAtual( UBound( aPaginaAtual ) - 1 ) )
+
+		If link = PaginaAtual Then
+			Response.Write("active")
+		End if
+	End function 
 %>
