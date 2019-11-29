@@ -1,3 +1,4 @@
+<!-- #include file="../auth/auth.asp" -->
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -46,7 +47,7 @@
     
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="//<%=url_admin%>/auth/logoff.asp">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span></a>
     </li>
