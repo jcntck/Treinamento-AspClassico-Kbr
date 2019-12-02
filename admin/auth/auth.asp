@@ -13,10 +13,10 @@
 	If aPaginaAtual( uBound(aPaginaAtual) - 1 ) <> "auth" Then
 		Response.Cookies("CK_PAGE") = url_admin & PaginaAtual
 
-		usuarioId    = Request.Cookies("CK_USUARIOID") 
-		usuarioTipo  = Request.Cookies("CK_USUARIOTIPO") 
-		usuarioEmail = Request.Cookies("CK_USUARIOEMAIL")
-		usuarioNome  = Request.Cookies("CK_USUARIONOME")
+		usuarioId    = Session("S_USUARIOID") 
+		usuarioTipo  = Session("S_USUARIOTIPO") 
+		usuarioEmail = Session("S_USUARIOEMAIL")
+		usuarioNome  = Session("S_USUARIONOME")
 		
 		If usuarioId = "" OR Not IsNumeric(usuarioId) Then usuarioId = 0
 		If usuarioTipo = "" OR Not IsNumeric(usuarioTipo) Then usuarioTipo = 0

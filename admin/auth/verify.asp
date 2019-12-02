@@ -1,4 +1,5 @@
 <!--#include file="../../config/config.asp"-->
+<!-- #include file="../../config/functions/md5.asp" -->
 <%
     accessDenied                = True
     Response.Cookies("CK_PAGE") = ""
@@ -6,7 +7,7 @@
 
     user_type = Request.QueryString("type")
     email     = Request.Form("email")
-    senha     = Request.Form("senha")
+    senha     = md5(Request.Form("senha"))
 
     SQL = "SELECT * FROM usuarios "&_
           "WHERE email = '"&email&"' AND senha = '"&senha&"';"
@@ -15,10 +16,12 @@
 
     If Not query.EOF Then
         If CInt(query("isLojista")) = 0 OR CInt(query("isLojista")) = CInt(user_type) Then
-            Response.Cookies("CK_USUARIOID")    = query("id")
-            Response.Cookies("CK_USUARIOTIPO")  = query("isLojista")
-            Response.Cookies("CK_USUARIOEMAIL") = query("email")
-            Response.Cookies("CK_USUARIONOME")  = canBeNull(query("nome_responsavel"))
+
+            Session("S_USUARIOID")    = query("id")
+            Session("S_USUARIOTIPO")  = query("isLojista")
+            Session("S_USUARIOEMAIL") = query("email")
+            Session("S_USUARIONOME")  = canBeNull(query("nome_responsavel"))
+            Session.Timeout = 720
 
             accessDenied = False
             page       = Request.Cookies("CK_PAGE")
