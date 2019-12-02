@@ -1,3 +1,4 @@
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <!-- #include file = "../../inc/head.asp" -->
@@ -21,21 +22,25 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h6 class="m-0 font-weight-bold align-self-center">Dados cadastrados:</h6>
-                            <button type="button" class="btn btn-primary">Adicionar novo</button>
+                            <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
                         </div>
                         <div class="card-body">
-                            <table class="table" id="lojistas">
+                            <table class="table-responsive table-bordered text-center" id="lojistas">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Logotipo</th>
-                                        <th scope="col">Razão Social</th>
-                                        <th scope="col">Nome Responsável</th>
-                                        <th scope="col">E-mail</th>
-                                        <th scope="col">Senha</th>
-                                        <th scope="col">Celular</th>
+                                        <th scope="col" class="p-1">Logotipo</th>
+                                        <th scope="col" class="p-1">Razão Social</th>
+                                        <th scope="col" class="p-1">Nome Responsável</th>
+                                        <th scope="col" class="p-1">E-mail</th>
+                                        <th scope="col" class="p-1">Celular</th>
+                                        <th class="text-center" class="p-1">Ações</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% 
+                                        Call gerarTabela("usuarios", Array("logotipo", "razao_social", "nome_responsavel", "email", "celular"), "isLojista = 1" )                                        
+                                    %>
                                 </tbody>
                             </table>
                         </div>
@@ -57,10 +62,6 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 <!-- #include file = "../../inc/footer.asp" -->
 </body>
 </html>

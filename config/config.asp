@@ -3,6 +3,6 @@
     tituloAdmin = tituloSite & " - Painel Administrativo"
     
 %>
-<!-- #include file="functions/functions.asp" -->
 <!-- #include file="configPath.asp" -->
 <!-- #include file="configDb.asp" -->
+<!-- #include file="functions/functions.asp" -->

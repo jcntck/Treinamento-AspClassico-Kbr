@@ -37,4 +37,24 @@
 			Response.Write("active")
 		End if
 	End function 
+
+	Function gerarTabela( ByVal tabela, ByVal array, ByVal options )
+
+		Set data = getAllSQL(tabela, options)
+		linha = ""
+
+		Do until data.EOF
+			linha = linha & "<tr>"
+			For Each td in array
+				linha = linha & "<td class='p-2'>"&data(td)&"</td>"
+			Next
+			linha = linha & "<td><a href='atualizar.asp?id="&data("id")&"'>Atualizar</a></td>"&_
+					 		"<td><a href='deletar.asp?id="&data("id")&"'>Deletar</a></td>"
+			linha = linha & "</tr>"
+			data.MoveNext
+		Loop 
+
+		Response.Write(linha)
+
+	End Function
 %>
