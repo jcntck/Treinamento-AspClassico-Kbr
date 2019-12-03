@@ -48,8 +48,8 @@
 			For Each td in array
 				linha = linha & "<td class='p-2'>"&data(td)&"</td>"
 			Next
-			linha = linha & "<td><a href='atualizar.asp?id="&data("id")&"'>Atualizar</a></td>"&_
-					 		"<td><a href='deletar.asp?id="&data("id")&"'>Deletar</a></td>"
+			linha = linha & "<td><a href='edit.asp?id="&data("id")&"'>Atualizar</a></td>"&_
+					 		"<td><a href='remove.asp?id="&data("id")&"'>Deletar</a></td>"
 			linha = linha & "</tr>"
 			data.MoveNext
 		Loop 
