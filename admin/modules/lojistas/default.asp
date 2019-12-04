@@ -1,4 +1,3 @@
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <!-- #include file = "../../inc/head.asp" -->
@@ -33,8 +32,8 @@
                                         <th scope="col" class="p-1">Nome Responsável</th>
                                         <th scope="col" class="p-1">E-mail</th>
                                         <th scope="col" class="p-1">Celular</th>
-                                        <th class="text-center" class="p-1">Ações</th>
-                                        <th></th>
+                                        <th scope="col" class="p-1">Editar</th>
+                                        <th scope="col" class="p-1">Remover</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,8 +59,31 @@
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
+
+        <!-- Modal Excluir -->
+        <div class="modal fade" id="excluir" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-light text-danger">
+                    <h4 class="modal-title">Deseja realmente remover?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja remover esta loja?</p>
+                    <p>Os dados apagados não poderão ser recuperados.</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fechar</button> -->
+                    <button type="button" class="btn btn-primary btn-danger" id="confirm"><i class="fas fa-trash-alt"></i><span class='mx-2'>Remover</span></button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- End of Page Wrapper -->
 <!-- #include file = "../../inc/footer.asp" -->
+<script src="js/functions.js"></script>
 </body>
 </html>

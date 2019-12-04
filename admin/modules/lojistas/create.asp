@@ -28,7 +28,7 @@
 
                         <div class="card-body">
                             
-                            <form method="post" action="store.asp" name="formLojista">
+                            <form method="post" action="store.asp" name="formLojista" enctype="multipart/form-data">
 
                                 <div class="row mb-4">
                                     <div class="col">
@@ -68,6 +68,13 @@
                                     <div class="col">
                                         <label for="contato">Telefone / Celular: </label>
                                         <input type="tel" class="form-control" name="contato" id="contato" placeholder="Telefone ou celular da Empresa" maxlength="11" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="logotipo">Logotipo da empresa: </label>
+                                        <input type="file" class="form-control-file" id="logotipo" name="logotipo">
                                     </div>
                                 </div>
 

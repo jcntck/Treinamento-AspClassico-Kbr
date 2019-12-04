@@ -1,4 +1,3 @@
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
 <html lang="pt-br">
 <!-- #include file = "../../inc/head.asp" -->
 <body>
@@ -31,7 +30,7 @@
 
                         <div class="card-body">
                             
-                            <form method="post" action="update.asp" name="formLojista">
+                            <form method="post" action="update.asp" name="formLojista" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<%=lojista(0)%>">
                                 <div class="row mb-4">
                                     <div class="col">
@@ -74,6 +73,19 @@
                                     <div class="col">
                                         <label for="contato">Telefone / Celular: </label>
                                         <input type="tel" class="form-control" name="contato" id="contato" placeholder="Telefone ou celular da Empresa" value="<%=lojista(6)%>" maxlength="11" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-2">
+                                        <% If lojista(UBound(lojista) - 1) <> "" Then %>
+                                            <img src="uploads/<%=lojista(UBound(lojista) - 1)%>" alt="Logotipo" class="img-fluid img-thumbnail">
+                                        <% End If %>
+                                    </div>
+                                    <div class="col">
+                                        <input type="hidden" name="logotipo_antigo" value="<%=lojista(UBound(lojista) - 1)%>">
+                                        <label for="logotipo">Logotipo da empresa: </label>
+                                        <input type="file" class="form-control-file" id="logotipo" name="logotipo">
                                     </div>
                                 </div>
 

@@ -3,21 +3,39 @@
 <!--#include file="../../auth/auth.asp"-->
 <!-- #include file="../../../config/functions/md5.asp" -->
 <%
-    razao_social     = Request.Form("razao_social")
-    nome_responsavel = Request.Form("nome_responsavel")
-    email            = Request.Form("email")
-    senha            = md5(Request.Form("senha"))
-    contato          = Request.Form("contato")
+    Dim fileUpload
+    Set fileUpload = Server.CreateObject("SoftArtisans.FileUp") 
 
-    SQL = "INSERT INTO usuarios (razao_social, nome_responsavel, email, senha, celular) "&_
+    razao_social     = fileUpload.Form("razao_social")
+    nome_responsavel = fileUpload.Form("nome_responsavel")
+    email            = fileUpload.Form("email")
+    senha            = md5(fileUpload.Form("senha"))
+    contato          = fileUpload.Form("contato")
+    logotipo         = ""
+
+    fileUpload.Path = Server.MapPath("uploads")
+            
+    If IsObject(fileUpload.Form("logotipo")) AND Not fileUpload.Form("logotipo").IsEmpty Then    
+        fileNameArray = Split(fileUpload.UserFilename, ".")
+        ext           = fileNameArray(UBound(fileNameArray))
+
+        logotipo = geraNomeArquivo(ext)
+        fileUpload.SaveAs(Server.MapPath("uploads\"&logotipo))
+    End If
+    
+    '----- Dereference FileUp
+    Set fileUpload = Nothing
+
+    SQL = "INSERT INTO usuarios (razao_social, nome_responsavel, email, senha, celular, logotipo) "&_
           "VALUES "&_
           "('"&razao_social&"', "&_
           "'"&nome_responsavel&"', "&_
           "'"&email&"', "&_
           "'"&senha&"', "&_
-          "'"&contato&"');"
+          "'"&contato&"', "&_
+          "'"&logotipo&"');"
     
     execSQL( SQL )
 
-    Response.Redirect("default.asp")
+    Response.Redirect("./")
 %>
