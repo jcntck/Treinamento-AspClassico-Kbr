@@ -13,14 +13,14 @@
     contato          = fileUpload.Form("contato")
     logotipo         = ""
 
-    fileUpload.Path = Server.MapPath("uploads")
-            
+    fileUpload.Path = Server.MapPath("..\..\uploads\logotipo\")
+
     If IsObject(fileUpload.Form("logotipo")) AND Not fileUpload.Form("logotipo").IsEmpty Then    
         fileNameArray = Split(fileUpload.UserFilename, ".")
         ext           = fileNameArray(UBound(fileNameArray))
 
         logotipo = geraNomeArquivo(ext)
-        fileUpload.SaveAs(Server.MapPath("uploads\"&logotipo))
+        fileUpload.SaveAs(Server.MapPath("..\..\uploads\logotipo\"&logotipo))
     End If
     
     '----- Dereference FileUp

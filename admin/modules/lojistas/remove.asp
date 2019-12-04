@@ -10,7 +10,7 @@
     logotipo = lojista(UBound(lojista) - 1)
     
     If logotipo <> "" Then
-        fileUpload.Delete Server.MapPath("uploads\"&logotipo)
+        fileUpload.Delete Server.MapPath("..\..\uploads\logotipo\"&logotipo)
     End If
 
     SQL = "DELETE FROM usuarios WHERE id = "&id&";"

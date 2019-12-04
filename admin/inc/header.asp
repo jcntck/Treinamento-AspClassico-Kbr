@@ -37,7 +37,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="//<%=url_admin%>modules/participantes/">
             <i class="fas fa-users"></i>
             <span>Participantes</span></a>
     </li>

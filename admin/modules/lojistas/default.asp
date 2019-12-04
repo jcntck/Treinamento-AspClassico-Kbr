@@ -24,7 +24,7 @@
                             <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
                         </div>
                         <div class="card-body">
-                            <table class="table-responsive table-bordered text-center" id="lojistas">
+                            <table class="table table-bordered text-center" id="lojistas">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="p-1">Logotipo</th>

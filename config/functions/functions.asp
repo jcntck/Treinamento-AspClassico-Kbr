@@ -47,7 +47,7 @@
 			linha = linha & "<tr>"
 			For Each td in array
 				If td = "logotipo" AND data(td) <> "" Then
-					linha = linha & "<td class='p-2'><div style='width: 75px'><img class='img-fluid' src='uploads/"&data(td)&"' alt='Logotipo'></div></td>"
+					linha = linha & "<td class='p-2'><div style='width: 75px'><img class='img-fluid' src='../../uploads/logotipo/"&data(td)&"' alt='Logotipo'></div></td>"
 				else
 					linha = linha & "<td class='p-2'>"&data(td)&"</td>"
 				end if

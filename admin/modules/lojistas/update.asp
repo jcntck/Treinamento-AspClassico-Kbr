@@ -13,7 +13,7 @@
     contato          = fileUpload.Form("contato")
     logotipo         = fileUpload.Form("logotipo_antigo")
 
-    fileUpload.Path = Server.MapPath("uploads")
+    fileUpload.Path = Server.MapPath("..\..\uploads\logotipo\")
 
     SQL = "SELECT id FROM usuarios WHERE email = '"&email&"' AND id <> "&id&";"
     Set emailUnique = getSQL(SQL)
@@ -25,11 +25,11 @@
             ext           = fileNameArray(UBound(fileNameArray))
 
             If  logotipo <> "" Then
-                fileUpload.Delete Server.MapPath("uploads\"&logotipo)
+                fileUpload.Delete Server.MapPath("..\..\uploads\logotipo\"&logotipo)
             End If
 
             logotipo = geraNomeArquivo(ext)
-            fileUpload.SaveAs(Server.MapPath("uploads\"&logotipo))
+            fileUpload.SaveAs(Server.MapPath("..\..\uploads\logotipo\"&logotipo))
             
         End If
 
