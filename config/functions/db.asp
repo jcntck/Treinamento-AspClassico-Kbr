@@ -1,9 +1,9 @@
 <%
-    Function getAllSQL ( ByVal tabela, ByVal options )
+    Function getAllSQL ( ByVal tabela, ByVal options, ByVal id )
         If options <> "" Then
-            pSQL = "SELECT * FROM "&tabela&" WHERE "&options&" order by id DESC;"
+            pSQL = "SELECT * FROM "&tabela&" WHERE "&options&" order by "&id&" DESC;"
         Else
-            pSQL = "SELECT * FROM "&tabela&" order by id DESC;"
+            pSQL = "SELECT * FROM "&tabela&" order by "&id&" DESC;"
         End If
 
         Set query = getSQL( pSQL )

@@ -9,11 +9,14 @@
 
 <script>
     $(document).ready(function () {
-        $('#lojistas').DataTable({
+        $('#lojistas, #participantes').DataTable({
             "order": [],
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json"
             }
         });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     })
 </script>

@@ -1,3 +1,5 @@
+<!--#include file="../../../config/config.asp"-->
+<!--#include file="../../auth/auth.asp"-->
 <%
     Dim fileUpload
     Set fileUpload = Server.CreateObject("SoftArtisans.FileUp") 
@@ -11,31 +13,64 @@
         ExcelFile = Server.MapPath("../../uploads/excel/"&fileUpload.UserFilename)
         SQL = "SELECT * FROM [Lista de Participantes$]"
 
-        Set conn = Server.CreateObject("ADODB.Connection")
-        conn.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
+        Set connExcel = Server.CreateObject("ADODB.Connection")
+        connExcel.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";"
         SET RS = Server.CreateObject("ADODB.Recordset")
 
-        RS.Open SQL, conn
+        RS.Open SQL, connExcel
 
-        Response.Write("<table border=1><thead><tr>")
-        For each Column in RS.Fields
-            Response.Write("<th>"& Column.Name &"</th>")
-        Next 
-        Response.Write("</tr></thead><tbody>")
+        Dim campos(8)
+        Dim cont
         if not RS.EOF then
+            Dim values
+            values = ""
+
             while not rs.EOF
-                response.write "<tr>"
+                'Passa os campos do excel para um array
+                cont = 0
                 for each Field in RS.Fields
-                    response.write"<td>"& Field.value &"</td>"
+                    campos(cont) = Field.value
+                    cont = cont + 1
                 Next
-                response.write "</tr>"
+                
+                ingresso      = campos(0)
+                nome          = campos(1)
+                sobrenome     = campos(2)
+                tipo_ingresso = campos(3)
+                email         = campos(4)
+                If campos(5) <> "" Then telefone = campos(5) Else telefone = campos(6) End If
+                data_evento   = campos(7)
+                fase_evento   = campos(8)
+
+                SQL = "SELECT count(ingresso) as ingresso FROM participantes WHERE ingresso = '"&ingresso&"';"
+                Set query = getSQL(SQL)
+
+                If CInt(query("ingresso")) = 0 Then
+                    If values <> "" Then
+                        values = values & ", ('"&ingresso&"', '"&nome&"', '"&sobrenome&"', '"&tipo_ingresso&"', '"&email&"', '"&telefone&"', STR_TO_DATE('"&data_evento&"', '%d/%m/%Y'), '"&fase_evento&"')"
+                    Else
+                        values = values & "('"&ingresso&"', '"&nome&"', '"&sobrenome&"', '"&tipo_ingresso&"', '"&email&"', '"&telefone&"', STR_TO_DATE('"&data_evento&"', '%d/%m/%Y'), '"&fase_evento&"')"
+                    End If
+                End If
+
                 Rs.MoveNext
             WEnd
+            
+            If values <> "" Then
+
+                SQL = "INSERT INTO participantes (ingresso, nome, sobrenome, tipo_ingresso, email, telefone, data_evento, fase_evento) "&_
+                      "VALUES "&values&";"
+
+                execSQL( SQL )
+            End If
         End if
-        response.write "</tbody></table>"
         RS.close
-        conn.Close
+        connExcel.Close
 
         fileUpload.Delete
+        Set fileUpload = Nothing
+
     End If
+
+    Response.redirect("./")
 %>

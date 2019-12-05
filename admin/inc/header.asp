@@ -36,7 +36,7 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <li class="nav-item <% activePage("participantes") %>">
         <a class="nav-link" href="//<%=url_admin%>modules/participantes/">
             <i class="fas fa-users"></i>
             <span>Participantes</span></a>

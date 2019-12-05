@@ -39,21 +39,23 @@
 	End function 
 
 	Function gerarTabela( ByVal tabela, ByVal array, ByVal options )
-
-		Set data = getAllSQL(tabela, options)
 		linha = ""
+		id = "id"
+		if tabela = "participantes" then id = "ingresso"
+
+		Set data = getAllSQL(tabela, options, id)
 
 		Do until data.EOF
 			linha = linha & "<tr>"
 			For Each td in array
 				If td = "logotipo" AND data(td) <> "" Then
-					linha = linha & "<td class='p-2'><div style='width: 75px'><img class='img-fluid' src='../../uploads/logotipo/"&data(td)&"' alt='Logotipo'></div></td>"
+					linha = linha & "<td class='p-2 align-middle'><div style='width: 75px'><img class='img-fluid' src='../../uploads/logotipo/"&data(td)&"' alt='Logotipo'></div></td>"
 				else
-					linha = linha & "<td class='p-2'>"&data(td)&"</td>"
+					linha = linha & "<td class='p-2 align-middle'>"&data(td)&"</td>"
 				end if
 			Next
-			linha = linha & "<td><a href='edit.asp?id="&data("id")&"'><button type='button' class='btn btn-light text-info'><i class='fas fa-edit'></i></button></a></td>"&_
-					 		"<td><a href='remove.asp?id="&data("id")&"' class='btnExcluir' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
+			linha = linha & "<td class='align-middle'><a href='edit.asp?"&id&"="&data(""&id&"")&"'><button type='button' class='btn btn-light text-info'><i class='fas fa-edit'></i></button></a></td>"&_
+					 		"<td class='align-middle'><a href='remove.asp?"&id&"="&data(""&id&"")&"' class='btnExcluir' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
 			linha = linha & "</tr>"
 			data.MoveNext
 		Loop 
@@ -86,4 +88,30 @@
 							retornaNumeroAleatorio(3) &_ 
 							"." &	extensao
 	end function
+
+	Function formatDateTimeMySql( ByVal pData )
+		'AAAA-MM-DD
+		fRetorno = ""
+		
+		dia		= Day( pData )
+		mes		= Month( pData )
+		ano		= Year( pData )
+				
+		fRetorno = ano & "-" & mes & "-" & dia
+
+		formatDateTimeMySql = fRetorno
+	End Function
+
+	Function limparString( ByVal pString )
+		fRetorno = ""
+
+		Dim regEx
+		Set regEx = New RegExp
+		regEx.Pattern = "[^\w]"
+		regEx.Global = True
+
+		if pString <> "" Then fRetorno = regEx.Replace(pString,"") End if
+
+		limparString = fRetorno
+	End Function
 %>

@@ -24,16 +24,16 @@
                             <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered text-center" id="lojistas">
-                                <thead>
+                            <table class="table table-responsive table-bordered text-center" id="lojistas">
+                                <thead class="bg-primary text-white">
                                     <tr>
-                                        <th scope="col" class="p-1">Logotipo</th>
-                                        <th scope="col" class="p-1">Razão Social</th>
-                                        <th scope="col" class="p-1">Nome Responsável</th>
-                                        <th scope="col" class="p-1">E-mail</th>
-                                        <th scope="col" class="p-1">Celular</th>
-                                        <th scope="col" class="p-1">Editar</th>
-                                        <th scope="col" class="p-1">Remover</th>
+                                        <th class="p-1">Logotipo</th>
+                                        <th class="p-1">Razão Social</th>
+                                        <th class="p-1">Nome Responsável</th>
+                                        <th class="p-1">E-mail</th>
+                                        <th class="p-1">Celular</th>
+                                        <th class="p-1">Editar</th>
+                                        <th class="p-1">Remover</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,6 +84,6 @@
     </div>
     <!-- End of Page Wrapper -->
 <!-- #include file = "../../inc/footer.asp" -->
-<script src="js/functions.js"></script>
+<script src="../js/functions.js"></script>
 </body>
 </html>
