@@ -23,22 +23,36 @@
                             <h6 class="m-0 font-weight-bold align-self-center">Dados cadastrados:</h6>
                             <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-responsive table-bordered text-center" id="lojistas">
-                                <thead class="bg-primary text-white">
+                        <div class="card-body table-responsive">
+                            <table class="table table-bordered" id="lojistas">
+                                <thead class="bg-primary text-white text-nowrap">
                                     <tr>
-                                        <th class="p-1">Logotipo</th>
-                                        <th class="p-1">Razão Social</th>
-                                        <th class="p-1">Nome Responsável</th>
-                                        <th class="p-1">E-mail</th>
-                                        <th class="p-1">Celular</th>
-                                        <th class="p-1">Editar</th>
-                                        <th class="p-1">Remover</th>
+                                        <th>Logotipo</th>
+                                        <th>Razão Social</th>
+                                        <th>Nome Responsável</th>
+                                        <th>E-mail</th>
+                                        <th>Celular</th>
+                                        <th>Editar</th>
+                                        <!-- <th>Remover</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% 
-                                        Call gerarTabela("usuarios", Array("logotipo", "razao_social", "nome_responsavel", "email", "celular"), "isLojista = 1" )                                        
+                                        'Call gerarTabela("usuarios", Array("logotipo", "razao_social", "nome_responsavel", "email", "celular"), "isLojista = 1" )
+                                        Set lojistas = getAllSQL("usuarios", "isLojista = 1", "id")
+                                        Do until lojistas.EOF
+                                            Response.Write "<tr>"
+                                            
+                                            Response.Write "<td><div style='width: 75px'><img class='img-fluid' alt='logotipo' src='../../uploads/logotipo/"&lojistas("logotipo")&"'></td>"
+                                            Response.Write "<td>"&lojistas("razao_social")&"</td>"
+                                            Response.Write "<td>"&lojistas("nome_responsavel")&"</td>"
+                                            Response.Write "<td>"&lojistas("email")&"</td>"
+                                            Response.Write "<td>"&lojistas("celular")&"</td>"
+			                                Response.Write "<td class='align-middle'><a href='edit.asp?id="&lojistas("id")&"'>Editar</a></td>"
+					 		                                ''"<td class='align-middle'><a href='remove.asp?id="&lojistas("id")&"' class='btnExcluir' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
+			                                Response.Write "</tr>"
+			                                lojistas.MoveNext
+		                                Loop                                  
                                     %>
                                 </tbody>
                             </table>

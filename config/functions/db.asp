@@ -1,9 +1,9 @@
 <%
-    Function getAllSQL ( ByVal tabela, ByVal options, ByVal id )
+    Function getAllSQL ( ByVal tabela, ByVal options, ByVal nomeId )
         If options <> "" Then
-            pSQL = "SELECT * FROM "&tabela&" WHERE "&options&" order by "&id&" DESC;"
+            pSQL = "SELECT * FROM "&tabela&" WHERE "&options&" order by "&nomeId&" DESC;"
         Else
-            pSQL = "SELECT * FROM "&tabela&" order by "&id&" DESC;"
+            pSQL = "SELECT * FROM "&tabela&" order by "&nomeId&" DESC;"
         End If
 
         Set query = getSQL( pSQL )
@@ -11,9 +11,13 @@
         Set getAllSQL = query
     End Function
 
-    Function getByIdSQL ( ByVal tabela, ByVal id )
-        pSQL = "SELECT * FROM "&tabela&" WHERE id="&id&";"
-
+    Function getByIdSQL ( ByVal tabela, ByVal id, ByVal nomeId )
+        If nomeId = "ingresso" Then
+            pSQL = "SELECT * FROM "&tabela&" WHERE "&nomeId&"='"&id&"';"
+        Else
+            pSQL = "SELECT * FROM "&tabela&" WHERE "&nomeId&"="&id&";"
+        End if
+        
         Set query = getSQL(pSQL)
 
         If Not query.EOF Then

@@ -25,9 +25,14 @@
             Dim values
             values = ""
 
+            SQL = "SELECT ingresso FROM participantes;"
+            Set query = getSQL(SQL)
+            
+
             while not rs.EOF
                 'Passa os campos do excel para um array
                 cont = 0
+                find = false
                 for each Field in RS.Fields
                     campos(cont) = Field.value
                     cont = cont + 1
@@ -42,16 +47,24 @@
                 data_evento   = campos(7)
                 fase_evento   = campos(8)
 
-                SQL = "SELECT count(ingresso) as ingresso FROM participantes WHERE ingresso = '"&ingresso&"';"
-                Set query = getSQL(SQL)
+                
+                If Not query.EOF Then
+                    do until query.EOF 
+                        If query("ingresso") <> ingresso Then
+                            find = true
+                        End If  
+                        query.MoveNext
+                    loop
+                    query.MoveFirst
+                End If
 
-                If CInt(query("ingresso")) = 0 Then
+                If Not find Then
                     If values <> "" Then
                         values = values & ", ('"&ingresso&"', '"&nome&"', '"&sobrenome&"', '"&tipo_ingresso&"', '"&email&"', '"&telefone&"', STR_TO_DATE('"&data_evento&"', '%d/%m/%Y'), '"&fase_evento&"')"
                     Else
                         values = values & "('"&ingresso&"', '"&nome&"', '"&sobrenome&"', '"&tipo_ingresso&"', '"&email&"', '"&telefone&"', STR_TO_DATE('"&data_evento&"', '%d/%m/%Y'), '"&fase_evento&"')"
                     End If
-                End If
+                End if
 
                 Rs.MoveNext
             WEnd

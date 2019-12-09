@@ -27,28 +27,47 @@
                                 <span>Carregar participantes</span>
                             </a>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-responsive table-striped table-sm text-center" id="participantes">
-                                <thead class="bg-primary text-white">
+                        <div class="card-body table-responsive">
+                            <div>
+                                <button id="excluirDados" type='button' class='btn btn-danger btnExcluir' data-toggle='modal' data-target='#excluir'><i class='fas fa-trash-alt mx-2'></i><span>Excluir dados</span></button>
+                            </div>
+                            <input type="checkbox" name="allItems" id="allItems"><label for="allItems" class="mx-3">Selecionar todos os itens desta página</label> 
+                            <table class="table table-striped table-sm" id="participantes">
+                                <thead class="bg-primary text-white text-nowrap">
                                     <tr>
-                                        <th scope="col" class="p-1 align-middle">Ingresso</th>
-                                        <th scope="col" class="p-1 align-middle">Nome</th>
-                                        <th scope="col" class="p-1 align-middle">Sobrenome</th>
-                                        <th scope="col" class="p-1 align-middle">Tipo de ingresso</th>
-                                        <th scope="col" class="p-1 align-middle">E-mail</th>
-                                        <th scope="col" class="p-1 align-middle">Telefone</th>
-                                        <th scope="col" class="p-1 align-middle">Festa já tem data?</th>
-                                        <th scope="col" class="p-1 align-middle">Fase de planejamento da festa</th>
-                                        <th scope="col" class="p-1 align-middle">Editar</th>
-                                        <th scope="col" class="p-1 align-middle">Remover</th>
+                                        <th class="align-top"></th>
+                                        <th class="align-top">Ingresso</th>
+                                        <th class="align-top">Nome</th>
+                                        <th class="align-top">Sobrenome</th>
+                                        <th class="align-top">Tipo de ingresso</th>
+                                        <th class="align-top">E-mail</th>
+                                        <th class="align-top">Telefone</th>
+                                        <th class="align-top">Data Festa</th>
+                                        <th class="align-top">Status Planejamento</th>
+                                        <th class="align-top">Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% 
-                                        Call gerarTabela("participantes", Array("ingresso", "nome", "sobrenome", "tipo_ingresso", "email", "telefone", "data_evento", "fase_evento"), "")                                        
+                                        Set participantes = getAllSQL("participantes", "", "ingresso")
+                                        Do until participantes.EOF
+                                            Response.Write "<tr>"
+                                            Response.Write "<td class='align-middle'><input type='checkbox' name='item' value='"&participantes("ingresso")&"'></td>"
+                                            For Each td in participantes.Fields
+                                                If td.Name = "email" Then
+                                                Response.Write "<td class='p-2 text-justify'><div style='width: 200px'>"&td&"</div></td>"
+                                                Else
+                                                Response.Write "<td class='p-2 text-justify'>"&td&"</td>"
+                                                End If
+                                            Next
+			                                Response.Write "<td class='align-middle'><a href='edit.asp?ingresso="&participantes("ingresso")&"'>Editar</a></td>"
+			                                Response.Write "</tr>"
+			                                participantes.MoveNext
+		                                Loop                                         
                                     %>
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                 </div>

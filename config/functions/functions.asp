@@ -38,32 +38,6 @@
 		End if
 	End function 
 
-	Function gerarTabela( ByVal tabela, ByVal array, ByVal options )
-		linha = ""
-		id = "id"
-		if tabela = "participantes" then id = "ingresso"
-
-		Set data = getAllSQL(tabela, options, id)
-
-		Do until data.EOF
-			linha = linha & "<tr>"
-			For Each td in array
-				If td = "logotipo" AND data(td) <> "" Then
-					linha = linha & "<td class='p-2 align-middle'><div style='width: 75px'><img class='img-fluid' src='../../uploads/logotipo/"&data(td)&"' alt='Logotipo'></div></td>"
-				else
-					linha = linha & "<td class='p-2 align-middle'>"&data(td)&"</td>"
-				end if
-			Next
-			linha = linha & "<td class='align-middle'><a href='edit.asp?"&id&"="&data(""&id&"")&"'><button type='button' class='btn btn-light text-info'><i class='fas fa-edit'></i></button></a></td>"&_
-					 		"<td class='align-middle'><a href='remove.asp?"&id&"="&data(""&id&"")&"' class='btnExcluir' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
-			linha = linha & "</tr>"
-			data.MoveNext
-		Loop 
-
-		Response.Write(linha)
-
-	End Function
-
 	function retornaNumeroAleatorio(qtd)
 		str_aleatorio = ""
 		if qtd="" or not isnumeric(qtd) then qtd=0
@@ -96,6 +70,9 @@
 		dia		= Day( pData )
 		mes		= Month( pData )
 		ano		= Year( pData )
+
+		if dia < 10 Then dia = "0" & dia
+		if mes < 10 then mes = "0" & mes
 				
 		fRetorno = ano & "-" & mes & "-" & dia
 

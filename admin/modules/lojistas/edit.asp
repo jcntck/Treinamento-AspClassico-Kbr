@@ -2,7 +2,7 @@
 <!-- #include file = "../../inc/head.asp" -->
 <body>
     <%
-        lojista = getByIdSQL("usuarios", Request.queryString("id"))
+        lojista = getByIdSQL("usuarios", Request.queryString("id"), "id")
     %>
     <!-- Page Wrapper -->
     <div id="wrapper">
