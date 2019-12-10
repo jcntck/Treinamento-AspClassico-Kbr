@@ -47,7 +47,7 @@
     
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="//<%=url_admin%>/auth/logoff.asp">
+        <a class="nav-link" href="//<%=url_auth%>logoff.asp?type=0">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span></a>
     </li>
