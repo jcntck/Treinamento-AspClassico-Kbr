@@ -14,7 +14,7 @@
                 </div>
                 <button type="submit" class="btn btn-info px-4 my-3">Enviar</button>
             </form>
-            <p class="mt-5">Ou se preferir, <a href="#" >carregue um arquivo CSV</a></p>
+            <p class="mt-5">Ou se preferir, <a href="csv.asp" >carregue um arquivo CSV</a></p>
         </div>
     </div>
 </main>

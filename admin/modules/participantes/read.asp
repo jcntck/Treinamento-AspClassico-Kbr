@@ -38,7 +38,7 @@
                     cont = cont + 1
                 Next
                 
-                ingresso      = campos(0)
+                ingresso      = replace(campos(0), "-", "")
                 nome          = campos(1)
                 sobrenome     = campos(2)
                 tipo_ingresso = campos(3)

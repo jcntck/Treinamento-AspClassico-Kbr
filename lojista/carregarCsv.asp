@@ -5,33 +5,46 @@
 <body>
 <!-- #include file = "inc/header.asp" -->
 <%
-    codigos = Request.Form("codigos")
+    Dim fileUpload
+    Set fileUpload = Server.CreateObject("SoftArtisans.FileUp") 
 
-    If InStr(codigos, ";") > 0 Then 
-        codigos = replace(codigos, Chr(10), "")
-        codigos = replace(codigos, Chr(13), "")
-        codigos = replace(codigos, " ", "")
-        codigos = split(codigos, ";")
-    Else
-        codigos = replace(codigos, Chr(10), "")
-        codigos = split(codigos, Chr(13))
-    End If
+    fileUpload.Path = Server.MapPath("..\admin\uploads\excel\")
 
-    values = ""
-    for each cod in codigos
-        if cod <> "" then
-            values = values&"'"&cod&"',"
-        end if
-    next
+    If IsObject(fileUpload.Form("csvFile")) AND Not fileUpload.Form("csvFile").IsEmpty Then 
+        fileUpload.Save
 
-    values = Left(values, Len(values) - 1)
+        csvPath = Server.MapPath("..\admin\uploads\excel\"&fileUpload.UserFilename)
+        set fso = createobject("scripting.filesystemobject")
+        set objFile = fso.opentextfile(csvPath)
 
-    SQL = "SELECT * FROM participantes WHERE ingresso in ("&values&");"
+        Dim content
+        Do until objFile.AtEndOfStream
+            content = content & objFile.readline & "|"
+        Loop
 
-    Set query = getSQL(SQL)
+        arrayCod = split(content, "|")
+        
+        values = ""
+        for each linha in arrayCod
+            if linha <> "" then
+                linha = replace(linha, chr(34), "")
+                cod = split(linha, ",")
+                values = values&"'"&cod(2)&"',"
+            end if
+        next
+        objFile.Close
 
+        values = Left(values, Len(values) - 1)
+
+        SQL = "SELECT * FROM participantes WHERE ingresso in ("&values&");"
+
+        Set query = getSQL(SQL)
+
+
+        fileUpload.Delete
+        Set fileUpload = Nothing
+    End if
 %>
-
 <main class="container mt-5" style="height: 85vh">
     <div class="row">
         <div class="col text-center">
@@ -40,7 +53,7 @@
     </div>
     <div class="row my-3">
         <div class="col my-3">
-           <a href="codigo.asp" role="button" class="btn btn-info float-right">Realizar nova consulta</a>
+           <a href="csv.asp" role="button" class="btn btn-info float-right">Realizar nova consulta</a>
         </div>
         <div class="col-12">
             <div class="table-responsive">
