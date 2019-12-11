@@ -79,7 +79,7 @@
                                 <div class="row mb-4">
                                     <div class="col-2">
                                         <% If lojista(UBound(lojista) - 1) <> "" Then %>
-                                            <img src="uploads/<%=lojista(UBound(lojista) - 1)%>" alt="Logotipo" class="img-fluid img-thumbnail">
+                                            <img src="../../uploads/logotipo/<%=lojista(UBound(lojista) - 1)%>" alt="Logotipo" class="img-fluid img-thumbnail">
                                         <% End If %>
                                     </div>
                                     <div class="col">

@@ -13,7 +13,13 @@
             <div id="content">
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    <%
+                        If Not isNullOrEmpty( action ) AND action = "success" Then
+                            Call messageSuccess("Lojista cadastrado com sucesso.")
+                        ElseIf Not isNullOrEmpty( action ) AND action = "delete" Then
+                            Call messageSuccess("Lojista deletado com sucesso.")
+                        End If
+                    %>
                     <!-- Page Heading -->
                     <h1 class="h3 my-4 text-gray-800">Lojistas</h1>
                     <p>Está é a área de gerenciamento dos lojistas que participarão do seu evento. Aqui você poderá cadastrar, atualizar, excluir e vizualizar com mais detalhes qualquer lojista que você tenha adicionado aqui.</p>
@@ -21,7 +27,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
                             <h6 class="m-0 font-weight-bold align-self-center">Dados cadastrados:</h6>
-                            <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
+                            <div>
+                                <a href="create.asp" role="button" class="btn btn-primary text-light">Adicionar novo</a>
+                            </div>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-bordered" id="lojistas">
@@ -33,23 +41,21 @@
                                         <th>E-mail</th>
                                         <th>Celular</th>
                                         <th>Editar</th>
-                                        <!-- <th>Remover</th> -->
+                                        <th>Remover</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% 
-                                        'Call gerarTabela("usuarios", Array("logotipo", "razao_social", "nome_responsavel", "email", "celular"), "isLojista = 1" )
                                         Set lojistas = getAllSQL("usuarios", "isLojista = 1", "id")
                                         Do until lojistas.EOF
                                             Response.Write "<tr>"
-                                            
                                             Response.Write "<td><div style='width: 75px'><img class='img-fluid' alt='logotipo' src='../../uploads/logotipo/"&lojistas("logotipo")&"'></td>"
                                             Response.Write "<td>"&lojistas("razao_social")&"</td>"
                                             Response.Write "<td>"&lojistas("nome_responsavel")&"</td>"
                                             Response.Write "<td>"&lojistas("email")&"</td>"
                                             Response.Write "<td>"&lojistas("celular")&"</td>"
-			                                Response.Write "<td class='align-middle'><a href='edit.asp?id="&lojistas("id")&"'>Editar</a></td>"
-					 		                                ''"<td class='align-middle'><a href='remove.asp?id="&lojistas("id")&"' class='btnExcluir' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
+			                                Response.Write "<td class='align-middle'><a href='edit.asp?id="&lojistas("id")&"'>Editar</a></td>"&_
+					 		                                "<td class='align-middle'><a href='remove.asp?id="&lojistas("id")&"' class='btnExcluirLojista' data-toggle='modal' data-target='#excluir'><button type='button' class='btn btn-light text-danger'><i class='fas fa-trash-alt'></i></button></a></td></a></td>"
 			                                Response.Write "</tr>"
 			                                lojistas.MoveNext
 		                                Loop                                  

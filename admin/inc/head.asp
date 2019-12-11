@@ -11,4 +11,5 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/sl-1.3.1/datatables.min.css"/>
     <!-- Sb Admin 2 Custom Files -->
     <link rel="stylesheet" href="//<%=url_admin%>css/sb-admin-2.min.css">
+    <link rel="stylesheet" href="//<%=url_admin%>css/style.css">
 </head>

@@ -7,13 +7,19 @@ $(document).ready(function() {
         })
     })
 
+    $(".btnExcluirLojista").click(function(e) {
+        var url = $(this).attr("href")
+        $('#confirm').click(function() {
+            window.location.replace(url)
+        })
+    })
+
     function excluirRegistros() {
         var checks = []
         $.each($('input[name="item"]:checked'), function() {
             checks.push($(this).val())
         });
 
-        console.log(checks)
         $.ajax({
             type: "POST",
             url: "remove.asp",

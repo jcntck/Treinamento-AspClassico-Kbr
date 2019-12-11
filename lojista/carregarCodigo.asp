@@ -7,6 +7,7 @@
 <%
     codigos = Request.Form("codigos")
 
+    codigos = replace(codigos, "-", "")
     If InStr(codigos, ";") > 0 Then 
         codigos = replace(codigos, Chr(10), "")
         codigos = replace(codigos, Chr(13), "")
@@ -16,6 +17,7 @@
         codigos = replace(codigos, Chr(10), "")
         codigos = split(codigos, Chr(13))
     End If
+
 
     values = ""
     for each cod in codigos
@@ -30,6 +32,10 @@
 
     Set query = getSQL(SQL)
 
+    if Not query.EOF Then
+        call gerarEmail(query)
+        query.MoveFirst
+    End if
 %>
 
 <main class="container mt-5" style="height: 85vh">

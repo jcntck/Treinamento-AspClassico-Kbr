@@ -6,11 +6,11 @@
     Set fileUpload = Server.CreateObject("SoftArtisans.FileUp") 
 
     id               = fileUpload.Form("id")
-    razao_social     = fileUpload.Form("razao_social")
-    nome_responsavel = fileUpload.Form("nome_responsavel")
+    razao_social     = limpa(fileUpload.Form("razao_social"))
+    nome_responsavel = limpa(fileUpload.Form("nome_responsavel"))
     email            = fileUpload.Form("email")
     senha            = fileUpload.Form("senha")
-    contato          = fileUpload.Form("contato")
+    contato          = limpa(fileUpload.Form("contato"))
     logotipo         = fileUpload.Form("logotipo_antigo")
 
     fileUpload.Path = Server.MapPath("..\..\uploads\logotipo\")

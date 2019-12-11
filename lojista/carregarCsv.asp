@@ -40,6 +40,10 @@
 
         Set query = getSQL(SQL)
 
+        if Not query.EOF Then
+            call gerarEmail(query)
+            query.MoveFirst
+        End if
 
         fileUpload.Delete
         Set fileUpload = Nothing

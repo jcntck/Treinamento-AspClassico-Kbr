@@ -6,7 +6,7 @@
 
     id = Request.queryString("id")
 
-    lojista = getByIdSQL("usuarios", id)
+    lojista = getByIdSQL("usuarios", id, "id")
     logotipo = lojista(UBound(lojista) - 1)
     
     If logotipo <> "" Then
@@ -16,5 +16,5 @@
     SQL = "DELETE FROM usuarios WHERE id = "&id&";"
     execSQL(SQL)
 
-    Response.Redirect("./")
+    Response.Redirect("./?action=delete")
 %>
